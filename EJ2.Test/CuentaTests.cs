@@ -29,6 +29,7 @@ namespace EJ2.Test
 
             //ACT
             Cuenta.DebitarSaldo(2500);
+
             double saldo = Cuenta.Saldo;
 
             //ASSERT
