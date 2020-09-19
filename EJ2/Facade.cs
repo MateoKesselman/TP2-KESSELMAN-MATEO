@@ -8,6 +8,19 @@ namespace EJ2
     {
         private RepositorioBanca repositorio = new RepositorioBanca();
 
+        public bool VerificarExistenciaDeCuenta(string pNumero)
+        {
+            bool verificarExistenciaDeCuenta = false;
+            Banca cuentaUnif = repositorio.Obtener(pNumero);
+            
+            if (cuentaUnif != null)
+            {
+                verificarExistenciaDeCuenta = true;
+            }
+
+            return verificarExistenciaDeCuenta;
+        }
+
         public void CrearCuentaUnificada(string pNumero, string pTitular)
         {
             Banca cuentaUnificada = new Banca(pNumero,pTitular);
@@ -112,8 +125,3 @@ namespace EJ2
         }
     }
 }
-
-//LLEVA SOLO LOS MÉTODOS QUE REPRESENTAN LAS OPERACIONES DEL SISTEMA
-//DEBO INGRESAR SOLAMENTE LOS DATOS PRIMITIVOS COMO PARÁMETROS (QUE PROVIENEN DESDE LA INTERFAZ)
-//DENTRO DEL MÉTODO DE FACHADA CREAR LOS OBJETOS QUE INTERACTÚEN ENTRE SI
-//Y LUEGO DEVOLVER LA INFORMACIÓN

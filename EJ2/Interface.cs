@@ -40,23 +40,25 @@ namespace EJ2
                         Console.Clear();
                         Console.Write("INGRESE NÚMERO UNIFICADO DE CUENTA (DNI): ");
                         string pNumCuenta = Console.ReadLine();
-
-                        while (cuentaElegida != 0)
+                        bool controlDeCuenta = facade.VerificarExistenciaDeCuenta(pNumCuenta);
+                        if (controlDeCuenta)
                         {
-                            cuentaElegida = 3;
-                            operación = 0;
-                            while ((cuentaElegida != 1) && (cuentaElegida != 2)&&(cuentaElegida != 0))
+                            while (cuentaElegida != 0)
                             {
-                                Console.Clear();
-                                Console.WriteLine(" ----------------------------------------------------------------------");
-                                Console.WriteLine(" ------------------ 1_CUENTA EN PESOS ---------------------------------");
-                                Console.WriteLine(" ------------------ 2_CUENTA EN DOLARES -------------------------------");
-                                Console.WriteLine(" ------------------ 0_SALIR -------------------------------------------");
-                                Console.WriteLine(" ----------------------------------------------------------------------");
-                                Console.WriteLine();
-                                Console.Write("INTRODUZCA NÚMERO:");
-                                cuentaElegida = int.Parse(Console.ReadLine());
-                            }
+                                cuentaElegida = 3;
+                                operación = 0;
+                                while ((cuentaElegida != 1) && (cuentaElegida != 2) && (cuentaElegida != 0))
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine(" ----------------------------------------------------------------------");
+                                    Console.WriteLine(" ------------------ 1_CUENTA EN PESOS ---------------------------------");
+                                    Console.WriteLine(" ------------------ 2_CUENTA EN DOLARES -------------------------------");
+                                    Console.WriteLine(" ------------------ 0_SALIR -------------------------------------------");
+                                    Console.WriteLine(" ----------------------------------------------------------------------");
+                                    Console.WriteLine();
+                                    Console.Write("INTRODUZCA NÚMERO:");
+                                    cuentaElegida = int.Parse(Console.ReadLine());
+                                }
 
                                 if (cuentaElegida != 0)
                                 {
@@ -99,7 +101,7 @@ namespace EJ2
                                             Console.WriteLine("SALDO INSUFICIENTE PARA REALIZAR LA OPERACIÓN");
                                             Console.ReadKey();
                                         }
-                                }
+                                    }
                                     else if (operación == 3)
                                     {
                                         double result = facade.ObtenerSaldoCuentaEnPesos(pNumCuenta);
@@ -114,7 +116,7 @@ namespace EJ2
                                         Console.Write("INGRESE SALDO A ACREDITAR: ");
                                         double pSaldo = Convert.ToDouble(Console.ReadLine());
                                         facade.AcreditarCuentaEnDolares(pNumCuenta, pSaldo);
-                                }
+                                    }
                                     else if (operación == 2)
                                     {
                                         Console.Write("INGRESE SALDO A DEBITAR: ");
@@ -131,7 +133,7 @@ namespace EJ2
                                             Console.WriteLine("SALDO INSUFICIENTE PARA REALIZAR LA OPERACIÓN");
                                             Console.ReadKey();
                                         }
-                                }
+                                    }
                                     else if (operación == 3)
                                     {
                                         double result = facade.ObtenerSaldoCuentaEnDolares(pNumCuenta);
@@ -139,8 +141,14 @@ namespace EJ2
                                         Console.ReadKey();
                                     }
 
-                                }                 
-                            
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("LA CUENTA NO EXISTE");
+                            Console.ReadKey();
                         }
                         break;
                     case 3:
@@ -148,63 +156,73 @@ namespace EJ2
                         Console.Write("INGRESE NÚMERO UNIFICADO DE CUENTA (DNI): ");
                         string pNumeroCuenta = Console.ReadLine();
                         int op = 3;
-                        while (op != 0)
-                        { 
-                            while ((op != 1) && (op != 2) && (op != 0))
+                        bool controlCuenta = facade.VerificarExistenciaDeCuenta(pNumeroCuenta);
+                        if (controlCuenta)
+                        {
+                            while (op != 0)
                             {
-                                Console.Clear();
-                                Console.WriteLine(" ----------------------------------------------------------------------");
-                                Console.WriteLine(" ------------ 1_TRANSFERIR PESOS A LA CUENTA EN DOLARES ---------------");
-                                Console.WriteLine(" ------------ 2_TRANSFERIR DOLARES A LA CUENTA EN PESOS ---------------");
-                                Console.WriteLine(" ------------ 0_SALIR -------------------------------------------------");
-                                Console.WriteLine(" ----------------------------------------------------------------------");
-                                Console.WriteLine();
-                                Console.Write("INTRODUZCA NÚMERO:");
-                                op = int.Parse(Console.ReadLine());
-                            }
+                                while ((op != 1) && (op != 2) && (op != 0))
+                                {
+                                    Console.Clear();
+                                    Console.WriteLine(" ----------------------------------------------------------------------");
+                                    Console.WriteLine(" ------------ 1_TRANSFERIR PESOS A LA CUENTA EN DOLARES ---------------");
+                                    Console.WriteLine(" ------------ 2_TRANSFERIR DOLARES A LA CUENTA EN PESOS ---------------");
+                                    Console.WriteLine(" ------------ 0_SALIR -------------------------------------------------");
+                                    Console.WriteLine(" ----------------------------------------------------------------------");
+                                    Console.WriteLine();
+                                    Console.Write("INTRODUZCA NÚMERO:");
+                                    op = int.Parse(Console.ReadLine());
+                                }
 
-                            if (op == 1)
-                            {
-                                Console.Clear();
-                                double resultado = facade.ObtenerSaldoCuentaEnPesos(pNumeroCuenta);
-                                Console.WriteLine("SALDO EN PESOS DISPONIBLE: " + resultado);
-                                Console.Write("INGRESE SALDO EN PESOS A TRANSFERIR A LA CUENTA EN DOLARES (140 PESOS = 1 DOLAR): ");
-                                double pSaldo = Convert.ToDouble(Console.ReadLine());
-                                bool control = facade.TransferirPesosACuentaEnDolares(pNumeroCuenta, pSaldo);
-                                Console.Clear();
-                                if (control)
+                                if (op == 1)
                                 {
-                                    Console.WriteLine("LA OPERACIÓN FUE REALIZADA CON ÉXITO");
-                                    Console.ReadKey();
+                                    Console.Clear();
+                                    double resultado = facade.ObtenerSaldoCuentaEnPesos(pNumeroCuenta);
+                                    Console.WriteLine("SALDO EN PESOS DISPONIBLE: " + resultado);
+                                    Console.Write("INGRESE SALDO EN PESOS A TRANSFERIR A LA CUENTA EN DOLARES (140 PESOS = 1 DOLAR): ");
+                                    double pSaldo = Convert.ToDouble(Console.ReadLine());
+                                    bool control = facade.TransferirPesosACuentaEnDolares(pNumeroCuenta, pSaldo);
+                                    Console.Clear();
+                                    if (control)
+                                    {
+                                        Console.WriteLine("LA OPERACIÓN FUE REALIZADA CON ÉXITO");
+                                        Console.ReadKey();
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("SALDO INSUFICIENTE PARA REALIZAR LA OPERACIÓN");
+                                        Console.ReadKey();
+                                    }
+                                    op = 3;
                                 }
-                                else
+                                else if (op == 2)
                                 {
-                                    Console.WriteLine("SALDO INSUFICIENTE PARA REALIZAR LA OPERACIÓN");
-                                    Console.ReadKey();
+                                    Console.Clear();
+                                    double resultado = facade.ObtenerSaldoCuentaEnDolares(pNumeroCuenta);
+                                    Console.WriteLine("SALDO EN DOLARES DISPONIBLE: " + resultado);
+                                    Console.Write("INGRESE SALDO EN DOLARES A TRANSFERIR A LA CUENTA EN PESOS (1 DOLAR = 135 PESOS): ");
+                                    double pSaldo = Convert.ToDouble(Console.ReadLine());
+                                    bool control = facade.TransferirDolaresACuentaEnPesos(pNumeroCuenta, pSaldo);
+                                    Console.Clear();
+                                    if (control)
+                                    {
+                                        Console.WriteLine("LA OPERACIÓN FUE REALIZADA CON ÉXITO");
+                                        Console.ReadKey();
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("SALDO INSUFICIENTE PARA REALIZAR LA OPERACIÓN");
+                                        Console.ReadKey();
+                                    }
+                                    op = 3;
                                 }
-                                op = 3;
                             }
-                            else if (op == 2)
-                            {
-                                Console.Clear();
-                                double resultado = facade.ObtenerSaldoCuentaEnDolares(pNumeroCuenta);
-                                Console.WriteLine("SALDO EN DOLARES DISPONIBLE: " + resultado);
-                                Console.Write("INGRESE SALDO EN DOLARES A TRANSFERIR A LA CUENTA EN PESOS (1 DOLAR = 135 PESOS): ");
-                                double pSaldo = Convert.ToDouble(Console.ReadLine());
-                                bool control = facade.TransferirDolaresACuentaEnPesos(pNumeroCuenta, pSaldo);
-                                Console.Clear();
-                                if (control)
-                                {
-                                    Console.WriteLine("LA OPERACIÓN FUE REALIZADA CON ÉXITO");
-                                    Console.ReadKey();
-                                }
-                                else
-                                {
-                                    Console.WriteLine("SALDO INSUFICIENTE PARA REALIZAR LA OPERACIÓN");
-                                    Console.ReadKey();
-                                }
-                                op = 3;
-                            }     
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("LA CUENTA NO EXISTE");
+                            Console.ReadKey();
                         }
                         break;
                     case 0:
