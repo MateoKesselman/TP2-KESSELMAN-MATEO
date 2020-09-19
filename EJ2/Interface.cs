@@ -63,11 +63,11 @@ namespace EJ2
                                     while ((operación != 1) && (operación != 2) && (operación != 3))
                                     {
                                         Console.Clear();
-                                        Console.WriteLine(" ----------------------------------------------------------------------");
-                                        Console.WriteLine(" ------------------ 1_ACREDITAR SALDO ---------------------------------");
-                                        Console.WriteLine(" ------------------ 2_DEBITAR SALDO -----------------------------------");
-                                        Console.WriteLine(" ------------------ 3_MOSTRAR SALDO -----------------------------------");
-                                        Console.WriteLine(" ----------------------------------------------------------------------");
+                                        Console.WriteLine(" ---------------------------------------------------------------------");
+                                        Console.WriteLine(" ------------------ 1_ACREDITAR SALDO --------------------------------");
+                                        Console.WriteLine(" ------------------ 2_DEBITAR SALDO ----------------------------------");
+                                        Console.WriteLine(" ------------------ 3_MOSTRAR SALDO ----------------------------------");
+                                        Console.WriteLine(" ---------------------------------------------------------------------");
                                         Console.WriteLine();
                                         Console.Write("INTRODUZCA NÚMERO:");
                                         operación = int.Parse(Console.ReadLine());
