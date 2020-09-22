@@ -23,7 +23,7 @@ namespace EJ1
                 Console.WriteLine(" ----------------------------------------------------------------------");
                 Console.WriteLine();
 
-                Console.Write("INTRODUZCA NÚMERO:");
+                Console.Write(" INTRODUZCA NÚMERO:");
                 nNumero = int.Parse(Console.ReadLine());
 
                 switch (nNumero)

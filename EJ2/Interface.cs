@@ -56,7 +56,7 @@ namespace EJ2
                                     Console.WriteLine(" ------------------ 0_SALIR -------------------------------------------");
                                     Console.WriteLine(" ----------------------------------------------------------------------");
                                     Console.WriteLine();
-                                    Console.Write("INTRODUZCA NÚMERO:");
+                                    Console.Write(" INTRODUZCA NÚMERO:");
                                     cuentaElegida = int.Parse(Console.ReadLine());
                                 }
 
